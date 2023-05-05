@@ -27,8 +27,10 @@ namespace android {
 namespace hardware {
 namespace details {
 
+#ifdef USE_LEGACY_GBNCONSTRUCTORMAP
 // Deprecated; kept for ABI compatibility. Use getBnConstructorMap.
 DoNotDestruct<BnConstructorMap> gBnConstructorMap{};
+#endif
 
 DoNotDestruct<ConcurrentMap<const ::android::hidl::base::V1_0::IBase*,
                             wp<::android::hardware::BHwBinder>>>
@@ -38,8 +40,10 @@ DoNotDestruct<ConcurrentMap<const ::android::hidl::base::V1_0::IBase*,
 DoNotDestruct<ConcurrentMap<wp<::android::hidl::base::V1_0::IBase>, SchedPrio>> gServicePrioMap{};
 DoNotDestruct<ConcurrentMap<wp<::android::hidl::base::V1_0::IBase>, bool>> gServiceSidMap{};
 
+#ifdef USE_LEGACY_GBNCONSTRUCTORMAP
 // Deprecated; kept for ABI compatibility. Use getBsConstructorMap.
 DoNotDestruct<BsConstructorMap> gBsConstructorMap{};
+#endif
 
 // For static executables, it is not guaranteed that gBnConstructorMap are initialized before
 // used in HAL definition libraries.

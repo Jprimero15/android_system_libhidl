@@ -29,6 +29,23 @@ license {
     ],
 }
 
+soong_config_module_type {
+    name: "use_legacy_gbnconst",
+    module_type: "cc_defaults",
+    config_namespace: "legacyGbnConstVars",
+    bool_variables: ["use_legacy_gbnconstructormap"],
+    properties: ["cppflags"],
+}
+
+use_legacy_gbnconst {
+    name: "use_legacy_gbnconst_defaults",
+    soong_config_variables: {
+        use_legacy_gbnconstructormap: {
+            cppflags: ["-DUSE_LEGACY_GBNCONSTRUCTORMAP"],
+         },
+    },
+}
+
 cc_defaults {
     name: "libhidl-defaults",
     cflags: [
@@ -138,6 +155,7 @@ cc_defaults {
     defaults: [
         "hidl-module-defaults",
         "libhidl-defaults",
+        "use_legacy_gbnconst_defaults",
         "libhwbinder-impl-shared-libs",
     ],
 

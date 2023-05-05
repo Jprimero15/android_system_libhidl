@@ -29,10 +29,12 @@ namespace details {
 
 static sp<IBase> tryWrap(const std::string& descriptor, sp<IBase> iface) {
     auto func = getBsConstructorMap().get(descriptor, nullptr);
+#ifdef USE_LEGACY_GBNCONSTRUCTORMAP
     if (!func) {
         // TODO(b/69122224): remove this when prebuilts don't reference it
         func = gBsConstructorMap->get(descriptor, nullptr);
     }
+#endif
     if (func) {
         return func(static_cast<void*>(iface.get()));
     }
